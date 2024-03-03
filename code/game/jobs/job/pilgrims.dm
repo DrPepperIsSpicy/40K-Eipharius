@@ -41,6 +41,7 @@
 	latejoin_at_spawnpoints = FALSE
 	announced = FALSE
 	cultist_chance = 50
+	start_message = "<span class='notice'><b><font size=3>You are an Imperial Citizen local to the planet of Messina or at have been living in-system for long enough to become trusted among the locals here. <br> <span class = 'badmood'> + Go to your citizen tab and select your fate. + </span> </font></b></span>"
 
 
 	equip(var/mob/living/carbon/human/H)
@@ -53,7 +54,6 @@
 		H.witchblood()
 		H.voice_in_head(pick(GLOB.lone_thoughts))
 		H.get_idcard()?.access = list(access_village) // so they open all 211
-		to_chat(H, "<span class='notice'><b><font size=3>You are an Imperial Citizen local to the planet of Messina or at have been living in-system for long enough to become trusted among the locals here. <br> <span class = 'badmood'> + Go to your citizen tab and select your fate. + </span> </font></b></span>")
 
 		H.verbs += list(
 			/mob/living/carbon/human/proc/citizenclass,
@@ -158,14 +158,14 @@ Pilgrim Fate System
 				to_chat(U,"<span class='danger'><b><font size=4>THE VENATOR</font></b></span>")
 				to_chat(U,"<span class='goodmood'><b><font size=3>You have had glimpses of the future, in these waking dreams you see yourself fighting against a terrible foe. A dark and hideous creature, this day will come soon. Train and prepare yourself for this fight, track down the great beasts of the land. You are not hunted. You are the hunter. </font></b></span>")
 				U.add_stats(rand(18,19), rand(14,16), rand(12,18), rand (12,14))
-				new /obj/item/stack/thrones3/twenty(src.loc) 
+				new /obj/item/stack/thrones3/twenty(src.loc)
 				new /obj/item/clothing/suit/armor/exile(src.loc)
-				new /obj/item/melee/sword/machete/chopper/heavy/slayer(src.loc) 
-				
+				new /obj/item/melee/sword/machete/chopper/heavy/slayer(src.loc)
+
 			else if(prob(15))
 				to_chat(U,"<span class='danger'><b><font size=4>THE MASTER</font></b></span>")
 				to_chat(U,"<span class='goodmood'><b><font size=3>You are the master of the sewer, ruler of sin, master of your own kingdom. Embrace the dark and grow evil in the deep dark. </font></b></span>")
-				U.add_stats(rand(16,19), rand(16,19), rand(19,21), rand (14,16)) 
+				U.add_stats(rand(16,19), rand(16,19), rand(19,21), rand (14,16))
 				U.add_skills(rand(5,8),rand(5,6),rand(5,6),rand(2,6),rand(5,6))
 				new /obj/item/stack/thrones3/twenty(src.loc)
 				new /obj/item/clothing/suit/armor/scum2(src.loc)
@@ -197,9 +197,9 @@ Pilgrim Fate System
 			else // Add a fate that is high chance, you are a target of a bounty and give them clothing that cannot be removed which is a criminal marker. Criminal Barcode. Penitent Markings. Penitent Tattoo.
 				to_chat(U,"<span class='danger'><b><font size=4>THE TRIBAL</font></b></span>")
 				U.add_stats(rand(14,17), rand(14,17), rand(12,18), rand (12,14))
-				new /obj/item/stack/thrones3/twenty(src.loc) 
-				new /obj/item/stack/thrones3/twenty(src.loc) 
-				new /obj/item/melee/trench_axe/bspear/hunter(src.loc) 
+				new /obj/item/stack/thrones3/twenty(src.loc)
+				new /obj/item/stack/thrones3/twenty(src.loc)
+				new /obj/item/melee/trench_axe/bspear/hunter(src.loc)
 				new /obj/item/clothing/suit/armor/leather(src.loc)
 				to_chat(U,"<span class='goodmood'><b><font size=3>You are a local hunter and tribal from one of the many wandering tribes of Messina, you've only recently learned of Low Gothic and are adjusting to imperial rule.. </font></b></span>")
 		if("Nomad")
@@ -209,11 +209,11 @@ Pilgrim Fate System
 			new /obj/item/clothing/head/ushanka2(src.loc)
 			new /obj/item/device/radio/headset/headset_service(src.loc)
 			new /obj/item/storage/backpack/satchel/warfare(src.loc)
-			new /obj/item/device/flashlight/lantern(src.loc) 
+			new /obj/item/device/flashlight/lantern(src.loc)
 			equip_to_slot_or_store_or_drop(new /obj/item/card/id/pilgrim/penitent, slot_wear_id)
-			new /obj/item/storage/belt/stalker(src.loc) 
-			new /obj/item/clothing/head/pillbox(src.loc) 
-			new /obj/item/clothing/suit/chokha(src.loc) 
+			new /obj/item/storage/belt/stalker(src.loc)
+			new /obj/item/clothing/head/pillbox(src.loc)
+			new /obj/item/clothing/suit/chokha(src.loc)
 			U.verbs -= list(/mob/living/carbon/human/proc/penitentclass,)
 			U.stat = CONSCIOUS
 			U.sleeping = 0
@@ -269,9 +269,9 @@ Pilgrim Fate System
 				new /obj/item/clothing/head/scum(src.loc)
 				new /obj/item/storage/fancy/cigarettes/dromedaryco(src.loc)
 				new /obj/item/storage/fancy/cigarettes/dromedaryco(src.loc)
-				new /obj/item/storage/pill_bottle/happy(src.loc) 
-				new /obj/item/storage/pill_bottle/happy(src.loc) 
-				new /obj/item/storage/pill_bottle/zoom(src.loc) 
+				new /obj/item/storage/pill_bottle/happy(src.loc)
+				new /obj/item/storage/pill_bottle/happy(src.loc)
+				new /obj/item/storage/pill_bottle/zoom(src.loc)
 				new /obj/item/stack/thrones/five(src.loc)
 				new /obj/item/device/flashlight/lantern(src.loc)
 				new /obj/item/reagent_containers/food/snacks/threebread(src.loc)
@@ -299,7 +299,7 @@ Pilgrim Fate System
 			U.add_skills(rand(7,10),rand(8,10),rand(3,6),rand(2,4),rand(2,6)) //melee, ranged, med, eng, surgery
 			new /obj/item/storage/backpack/satchel/warfare(src.loc)
 			equip_to_slot_or_store_or_drop(new /obj/item/clothing/under/rank/victorian, slot_w_uniform)
-			new /obj/item/device/flashlight/lantern(src.loc) 
+			new /obj/item/device/flashlight/lantern(src.loc)
 			new /obj/item/clothing/shoes/jackboots/pilgrim_boots(src.loc)
 			new /obj/item/clothing/accessory/holster/hip(src.loc)
 			new /obj/item/gun/energy/las/laspistol(src.loc)
@@ -322,7 +322,7 @@ Pilgrim Fate System
 			new /obj/item/storage/backpack/satchel/warfare(src.loc)
 			equip_to_slot_or_store_or_drop(new /obj/item/clothing/under/rank/victorian, slot_w_uniform)
 			new /obj/item/device/radio/headset/headset_service(src.loc)
-			new /obj/item/device/flashlight/lantern(src.loc) 
+			new /obj/item/device/flashlight/lantern(src.loc)
 			new /obj/item/clothing/shoes/jackboots/pilgrim_boots(src.loc)
 			equip_to_slot_or_store_or_drop(new /obj/item/card/id/pilgrim/penitent, slot_wear_id)
 			U.verbs -= list(/mob/living/carbon/human/proc/penitentclass,)
@@ -429,7 +429,7 @@ Pilgrim Fate System
 			if(prob(15))
 				to_chat(U,"<span class='danger'><b><font size=4>THE VILLAIN</font></b></span>")
 				to_chat(U,"<span class='goodmood'>You are a villain of Messina and your objective is the spread of fear -- the dead cannot feel terror so keep them alive if you can. Torture and torment -- but never allow an end to their suffering.</font></b></span>")
-				U.add_stats(rand(14,15), rand(18,19), rand(18,21), rand (16,17)) 
+				U.add_stats(rand(14,15), rand(18,19), rand(18,21), rand (16,17))
 				U.add_skills(rand(7,10),rand(7,9),rand(7,8),rand(3,4),rand(7,8)) //melee, ranged, med, eng, surgery
 				new /obj/item/melee/sword/skinning_knife(src.loc)
 				new /obj/item/storage/firstaid/surgery(src.loc)
@@ -454,7 +454,7 @@ Pilgrim Fate System
 			else if(prob(35))
 				to_chat(U,"<span class='danger'><b><font size=4>THE THIEF</font></b></span>")
 				to_chat(U,"<span class='goodmood'>You are a cunning thief and criminal, work alongside the Gangers to rake in the ultimate score.((Your clothes are chameleon items and can be turned into any disguise you desire))</font></b></span>")
-				U.add_stats(rand(14,16), rand(14,16), rand(12,15), rand (15,17)) 
+				U.add_stats(rand(14,16), rand(14,16), rand(12,15), rand (15,17))
 				new /obj/item/gun/projectile/talon/renegade(src.loc)
 				if(prob(50))
 					new /obj/item/device/batterer(src.loc)
@@ -471,7 +471,7 @@ Pilgrim Fate System
 			else
 				to_chat(U,"<span class='danger'><b><font size=4>THE INVESTIGATOR</font></b></span>")
 				to_chat(U,"<span class='goodmood'>A private investigator working on behalf of the denizens of Messina, here you ply your trade and rub up against the horrors of imperial life. Every story, every death and tragedy -- decaying your soul into dust.</font></b></span>")
-				U.add_stats(rand(14,16), rand(14,16), rand(12,15), rand (15,17)) 
+				U.add_stats(rand(14,16), rand(14,16), rand(12,15), rand (15,17))
 				new /obj/item/gun/projectile/revolver/messina(src.loc)
 				new /obj/item/ammo_magazine/a357/ms(src.loc)
 				new /obj/item/ammo_magazine/a357/ms(src.loc)
@@ -514,7 +514,7 @@ Pilgrim Fate System
 			new /obj/item/storage/backpack/satchel/warfare(src.loc)
 			equip_to_slot_or_store_or_drop(new /obj/item/clothing/under/rank/victorian, slot_w_uniform)
 			new /obj/item/device/radio/headset/red_team(src.loc)
-			new /obj/item/device/flashlight/lantern(src.loc) 
+			new /obj/item/device/flashlight/lantern(src.loc)
 			new /obj/item/clothing/shoes/jackboots/noble(src.loc)
 			equip_to_slot_or_store_or_drop(new /obj/item/card/id/key/grand/monastary, slot_wear_id)
 			new /obj/item/stack/thrones/five(src.loc)
@@ -595,9 +595,9 @@ Pilgrim Fate System
 				to_chat(U,"<span class='goodmood'>Guided by your lust for thrones you smelled opportunity on this newly founded world. You have connectoins to the local gangs and trade guilds, find allies to further your interests in Messina.</font></b></span>")
 				U.add_stats(rand(14,15), rand(14,15), rand(15,17), rand (15,16))
 				new /obj/item/clothing/suit/armor/vest/leather/tailcoat(src.loc)
-				new /obj/item/stack/thrones/five(src.loc) 
-				new /obj/item/stack/thrones2/ten(src.loc) 
-				new /obj/item/stack/thrones3/twenty(src.loc) 
+				new /obj/item/stack/thrones/five(src.loc)
+				new /obj/item/stack/thrones2/ten(src.loc)
+				new /obj/item/stack/thrones3/twenty(src.loc)
 				new /obj/item/paper/administratum/weapon4(src.loc)
 				new /obj/item/paper/administratum/theta(src.loc)
 				new /obj/item/pen(src.loc)
@@ -612,8 +612,8 @@ Pilgrim Fate System
 				to_chat(U,"<span class='danger'><b><font size=4>THE BARD</font></b></span>")
 				to_chat(U,"<span class='goodmood'>A wandering bard you find yourself moving from tavern to tavern entertaining the masses for a few thrones at a time. This planet will surely be no different.</font></b></span>")
 				U.add_stats(rand(15,16), rand(17,18), rand(14,16), rand (12,16)) //
-				new /obj/item/stack/thrones/five(src.loc) 
-				new /obj/item/stack/thrones2/ten(src.loc) 
+				new /obj/item/stack/thrones/five(src.loc)
+				new /obj/item/stack/thrones2/ten(src.loc)
 				new /obj/item/stack/thrones3/twenty(src.loc)
 				new /obj/item/clothing/suit/musician(src.loc)
 				new /obj/item/clothing/head/musichat(src.loc)
@@ -623,7 +623,7 @@ Pilgrim Fate System
 				new /obj/item/pen(src.loc)
 				new /obj/item/reagent_containers/food/snacks/warfare/rat(src.loc)
 		if("Fate Touched")
-			U.add_stats(rand(16,17), rand(15,17), rand(10,16), rand (12,16)) 
+			U.add_stats(rand(16,17), rand(15,17), rand(10,16), rand (12,16))
 			U.add_skills(rand(2,7),rand(5,7),rand(1,6),rand(1,6),rand(1,6)) //melee, ranged, med, eng, surgery
 			new /obj/item/clothing/under/rank/chaplain(src.loc)
 			new /obj/item/storage/backpack/satchel/warfare(src.loc)
@@ -653,7 +653,7 @@ Pilgrim Fate System
 				to_chat(U,"<span class='goodmood'>Banish the heretic and redeem this world.</font></b></span>")
 				U.add_stats(rand(14,15), rand(14,15), rand(15,17), rand (15,16))
 				new /obj/item/clothing/suit/armor/knighthosp(src.loc)
-				new /obj/item/melee/chain/inqcs(src.loc) 
+				new /obj/item/melee/chain/inqcs(src.loc)
 				new /obj/item/clothing/head/helmet/hauberk(src.loc)
 				new /obj/item/reagent_containers/food/snacks/warfare/rat(src.loc)
 				new /obj/item/device/radio/headset/headset_sci(src.loc)
@@ -676,6 +676,7 @@ Pilgrim Fate System
 	announced = FALSE
 	cultist_chance = 35
 	species_role = "Ogryn"
+	start_message = "<span class='notice'><b><font size=3>You're an up-and-coming entrepreneur on Messina -- the wisest most big brain Ogryn bonehead that ever lived. You were sent here by House Goliath from Necromunda who supplies most of the sub-sector through the cold-trade, and the Militarum with cheap manufactured autoguns who give it by the freight-load to private armies in the frontier. Goliath expects big things from you, so you best get to grinding Oggy... </font></b></span>"
 
 	equip(var/mob/living/carbon/human/H)
 	//theres gonna be some redundencies here but I do not careeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
@@ -687,8 +688,6 @@ Pilgrim Fate System
 		H.verbs += list(
 			/mob/living/carbon/human/proc/ideology,
 		)
-		to_chat(H, "<span class='notice'><b><font size=3>You're an up-and-coming entrepreneur on Messina -- the wisest most big brain Ogryn bonehead that ever lived. You were sent here by House Goliath from Necromunda who supplies most of the sub-sector through the cold-trade, and the Militarum with cheap manufactured autoguns who give it by the freight-load to private armies in the frontier. Goliath expects big things from you, so you best get to grinding Oggy... </font></b></span>")
-		to_chat(H, "<span class='notice'><b><font size=3>You're an up-and-coming entrepreneur on Messina -- the wisest most big brain Ogryn bonehead that ever lived. You were sent here by House Goliath from Necromunda who supplies most of the sub-sector through the cold-trade, and the Militarum with cheap manufactured autoguns who give it by the freight-load to private armies in the frontier. Goliath expects big things from you, so you best get to grinding Oggy... </font></b></span>")
 
 /*
 /datum/job/innkeeper
@@ -736,6 +735,7 @@ Pilgrim Fate System
 	outfit_type = /decl/hierarchy/outfit/job/cargo/noble
 	latejoin_at_spawnpoints = TRUE
 	cultist_chance = 35
+	start_message = "<span class='notice'><b><font size=3>You are a loyal crew member to the Lord Captain and the head of the Vane dynasty, your noble title being granted by a letter of marque given to you by the Lord Trader inducting you into House Vane. You served directly to the Lord Captain years before they settled on Messina and helped the Lord Militant conquer the fringe, now your blade is dulled and you no longer find yourself serving on a voidship but instead in this accursed city of Messina.. </font></b></span>"
 
 	equip(var/mob/living/carbon/human/H)
 		var/current_name = H.real_name
@@ -745,14 +745,13 @@ Pilgrim Fate System
 		H.verbs += list(
 			/mob/living/carbon/human/proc/ideology,
 		)
-		H.add_stats(rand(14,17), rand(14,17), rand(14,17), rand(12,16)) 
+		H.add_stats(rand(14,17), rand(14,17), rand(14,17), rand(12,16))
 		H.add_skills(rand(7,11),rand(7,11),rand(2,8),6,rand(2,8)) //melee, ranged, med, eng, surgery
 		H.warfare_language_shit(LANGUAGE_LOW_GOTHIC)
 		H.adjustStaminaLoss(-INFINITY)
 		H.set_trait(new/datum/trait/death_tolerant())
 		H.assign_random_quirk()
 		H.warfare_faction = IMPERIUM
-		to_chat(H, "<span class='notice'><b><font size=3>You are a loyal crew member to the Lord Captain and the head of the Vane dynasty, your noble title being granted by a letter of marque given to you by the Lord Trader inducting you into House Vane. You served directly to the Lord Captain years before they settled on Messina and helped the Lord Militant conquer the fringe, now your blade is dulled and you no longer find yourself serving on a voidship but instead in this accursed city of Messina.. </font></b></span>")
 
 
 /datum/job/pathfinder
@@ -770,6 +769,7 @@ Pilgrim Fate System
 	latejoin_at_spawnpoints = TRUE
 	announced = FALSE
 	cultist_chance = 100
+	start_message = "<span class='notice'><b><font size=3>Having arrived recently from the spires of Necromunda. You, a former courtier, sought to establish something of a collection here with your remaining wealth. For whatever reason the dark, insidious and terrible aspects of this planet intrigued you enough to abandon your world and seek out... Messina.</font></b></span>"
 
 	equip(var/mob/living/carbon/human/H)
 		H.warfare_faction = IMPERIUM
@@ -784,7 +784,6 @@ Pilgrim Fate System
 		H.verbs += list(
 			/mob/living/carbon/human/proc/ideology,
 		)
-		to_chat(H, "<span class='notice'><b><font size=3>Having arrived recently from the spires of Necromunda. You, a former courtier, sought to establish something of a collection here with your remaining wealth. For whatever reason the dark, insidious and terrible aspects of this planet intrigued you enough to abandon your world and seek out... Messina.</font></b></span>")
 
 /datum/job/villagemedicae
 	title = "Biologis Medicae"
@@ -800,6 +799,7 @@ Pilgrim Fate System
 	latejoin_at_spawnpoints = TRUE
 	announced = FALSE
 	cultist_chance = 45
+	start_message = "<span class='notice'><b><font size=3>An experienced medicae from your homeworld, you are one of many who booked passage to Messina in the hopes of building industries of medicine on a new world. You serve directly under the Magos Biologis who commands over the medicae of this world.</font></b></span>"
 
 	equip(var/mob/living/carbon/human/H)
 		H.warfare_faction = IMPERIUM
@@ -814,7 +814,6 @@ Pilgrim Fate System
 		H.verbs += list(
 			/mob/living/carbon/human/proc/ideology,
 		)
-		to_chat(H, "<span class='notice'><b><font size=3>An experienced medicae from your homeworld, you are one of many who booked passage to Messina in the hopes of building industries of medicine on a new world. You serve directly under the Magos Biologis who commands over the medicae of this world.</font></b></span>")
 
 
 //loadouts below here
@@ -1029,7 +1028,7 @@ Pilgrim Fate System
     announced = FALSE
     cultist_chance = 0
     species_role = "Skaven"
-
+	start_message = "<span class='notice'><b><font size=3>You-you are smarter than rest of pack-herd. You-you sneak on ship-transport to go on new world-planet.</font></b></span>"
     equip(var/mob/living/carbon/human/H)
         H.warfare_faction = IMPERIUM
         ..()
@@ -1038,7 +1037,6 @@ Pilgrim Fate System
         H.warfare_language_shit(LANGUAGE_LOW_GOTHIC)
         H.adjustStaminaLoss(-INFINITY)
         H.assign_random_quirk()
-        to_chat(H, "<span class='notice'><b><font size=3>You-you are smarter than rest of pack-herd. You-you sneak on ship-transport to go on new world-planet.</font></b></span>")
 
 /datum/job/penitent //the plan is to have penitent be a default landing job, I will eventually add a randomized system that gives different loadouts much like the migrant system of lifeweb
 	title = "Pilgrim"
@@ -1051,7 +1049,7 @@ Pilgrim Fate System
 	outfit_type = /decl/hierarchy/outfit/job/penitent
 	latejoin_at_spawnpoints = TRUE
 	announced = FALSE
-
+	start_message = "<span class='notice'><b><font size=3>You are a Pilgrim. You left your home with little in search of more. Rumors of a holy site drew you to this planet and now life is in your hands. <br> <span class = 'badmood'> + Go to your pilgrim tab and select your fate. + </span> </font></b></span>"
 
 	equip(var/mob/living/carbon/human/H)
 		H.warfare_faction = IMPERIUM
@@ -1061,7 +1059,6 @@ Pilgrim Fate System
 		H.adjustStaminaLoss(-INFINITY)
 		H.assign_random_quirk()
 		H.witchblood()
-		to_chat(H, "<span class='notice'><b><font size=3>You are a Pilgrim. You left your home with little in search of more. Rumors of a holy site drew you to this planet and now life is in your hands. <br> <span class = 'badmood'> + Go to your pilgrim tab and select your fate. + </span> </font></b></span>")
 
 
 		H.verbs += list(
@@ -1083,7 +1080,7 @@ Pilgrim Fate System
 	latejoin_at_spawnpoints = TRUE
 	announced = FALSE
 	cultist_chance = 35
-
+	start_message = "<span class='notice'><b><font size=3>You're a ganger raised up in the factorums of Necromunda -- loyal completely to House Goliath as one of the best and brightest of the lot. You work for the Tavern Keeper, one of the heaviest hitters on Messina and are tasked with running the tavern alongside any other shady businesses you can keep afloat. For now the bosses don't want war with the Enforcers, so try to avoid making a mess. Like they say in Necromunda -- don't kill shit where you eat'.</font></b></span>"
 	equip(var/mob/living/carbon/human/H)
 		H.warfare_faction = IMPERIUM
 
@@ -1097,7 +1094,6 @@ Pilgrim Fate System
 			/mob/living/carbon/human/proc/gangerclass,
 			/mob/living/carbon/human/proc/ideology,
 		)
-		to_chat(H, "<span class='notice'><b><font size=3>You're a ganger raised up in the factorums of Necromunda -- loyal completely to House Goliath as one of the best and brightest of the lot. You work for the Tavern Keeper, one of the heaviest hitters on Messina and are tasked with running the tavern alongside any other shady businesses you can keep afloat. For now the bosses don't want war with the Enforcers, so try to avoid making a mess. Like they say in Necromunda -- don't kill shit where you eat'.</font></b></span>")
 
 
 /mob/living/carbon/human/proc/gangerclass()
@@ -1125,14 +1121,14 @@ Pilgrim Fate System
 			U.add_stats(rand(14,18), rand(14,17), rand(17,19), rand (12,16))
 			U.add_skills(rand(8,10),rand(5,6),rand(1,3),rand(2,6),rand(1,2)) //melee, ranged, med, eng, surgery
 			equip_to_slot_or_store_or_drop(new /obj/item/clothing/under/rank/victorian, slot_w_uniform)
-			new /obj/item/clothing/shoes/jackboots/pilgrim_boots(src.loc) 
-			new /obj/item/clothing/suit/armor/goliathplate(src.loc) 
-			new /obj/item/clothing/head/helmet/gangerhelm(src.loc) 
-			new /obj/item/device/radio/headset/ert(src.loc) 
-			new /obj/item/storage/backpack/satchel/warfare(src.loc) 
+			new /obj/item/clothing/shoes/jackboots/pilgrim_boots(src.loc)
+			new /obj/item/clothing/suit/armor/goliathplate(src.loc)
+			new /obj/item/clothing/head/helmet/gangerhelm(src.loc)
+			new /obj/item/device/radio/headset/ert(src.loc)
+			new /obj/item/storage/backpack/satchel/warfare(src.loc)
 			new /obj/item/melee/classic_baton/trench_club(src.loc)
-			equip_to_slot_or_store_or_drop(new /obj/item/card/id/pilgrim/penitent/keeper, slot_wear_id)  
-			new /obj/item/stack/thrones3/twenty(src.loc) 
+			equip_to_slot_or_store_or_drop(new /obj/item/card/id/pilgrim/penitent/keeper, slot_wear_id)
+			new /obj/item/stack/thrones3/twenty(src.loc)
 			to_chat(U,"<span class='goodmood'>You're the muscle of the gang. Extract protection money and protect your fellow gang members.<b><font size=3>")
 			U.verbs -= list(/mob/living/carbon/human/proc/gangerclass,)
 			U.stat = CONSCIOUS
@@ -1142,12 +1138,12 @@ Pilgrim Fate System
 			U.add_stats(rand(14,17), rand(15,17), rand(14,16), rand (14,16)) //ex criminal, not fed very well, but random stats
 			U.add_skills(rand(5,6),rand(9,11),rand(2,4),rand(5,10),rand(2,4)) //melee, ranged, med, eng, surgery
 			equip_to_slot_or_store_or_drop(new /obj/item/clothing/under/rank/penitent, slot_w_uniform)
-			new /obj/item/clothing/shoes/jackboots/pilgrim_boots(src.loc) 
-			new /obj/item/clothing/suit/storage/vest/tactical(src.loc) 
-			new /obj/item/device/radio/headset/ert(src.loc) 
-			equip_to_slot_or_store_or_drop(new /obj/item/card/id/pilgrim/penitent/keeper, slot_wear_id) 
-			new /obj/item/gun/projectile/automatic/machinepistol(src.loc) 
-			new /obj/item/ammo_magazine/mc9mmt/machinepistol(src.loc) 
+			new /obj/item/clothing/shoes/jackboots/pilgrim_boots(src.loc)
+			new /obj/item/clothing/suit/storage/vest/tactical(src.loc)
+			new /obj/item/device/radio/headset/ert(src.loc)
+			equip_to_slot_or_store_or_drop(new /obj/item/card/id/pilgrim/penitent/keeper, slot_wear_id)
+			new /obj/item/gun/projectile/automatic/machinepistol(src.loc)
+			new /obj/item/ammo_magazine/mc9mmt/machinepistol(src.loc)
 			new /obj/item/ammo_magazine/mc9mmt/machinepistol(src.loc)
 			to_chat(U, "<span class='goodmood'><b><font size=3>You're the assassin, the shadow of the gang. Take out any who oppose you.</font></b></span>")
 			U.verbs -= list(/mob/living/carbon/human/proc/gangerclass,)
@@ -1157,16 +1153,16 @@ Pilgrim Fate System
 		if("Rogue Doc")
 			U.add_stats(rand(15,17), rand(12,15), rand(12,15), rand (15,15))
 			U.add_skills(rand(4,6),rand(4,6),rand(10,10),rand(9,10),rand(10,10)) //melee, ranged, med, eng, surgery
-			new /obj/item/storage/backpack/satchel/warfare(src.loc) 
+			new /obj/item/storage/backpack/satchel/warfare(src.loc)
 			equip_to_slot_or_store_or_drop(new /obj/item/clothing/under/rank/victorian, slot_w_uniform)
-			new /obj/item/storage/belt/medical/full(src.loc)  
-			new /obj/item/clothing/shoes/jackboots/pilgrim_boots(src.loc) 
-			new /obj/item/device/radio/headset/ert(src.loc) 
-			equip_to_slot_or_store_or_drop(new /obj/item/card/id/pilgrim/penitent/keeper, slot_wear_id) 
-			new /obj/item/stack/thrones3/twenty(src.loc) 
-			new /obj/item/stack/thrones3/twenty(src.loc) 
-			new /obj/item/clothing/glasses/eyepatch/hud/medical(src.loc) 
-			new /obj/item/storage/pill_bottle/happy(src.loc) 
+			new /obj/item/storage/belt/medical/full(src.loc)
+			new /obj/item/clothing/shoes/jackboots/pilgrim_boots(src.loc)
+			new /obj/item/device/radio/headset/ert(src.loc)
+			equip_to_slot_or_store_or_drop(new /obj/item/card/id/pilgrim/penitent/keeper, slot_wear_id)
+			new /obj/item/stack/thrones3/twenty(src.loc)
+			new /obj/item/stack/thrones3/twenty(src.loc)
+			new /obj/item/clothing/glasses/eyepatch/hud/medical(src.loc)
+			new /obj/item/storage/pill_bottle/happy(src.loc)
 			new /obj/item/storage/pill_bottle/happy(src.loc)
 			to_chat(U,"<span class='goodmood'><b><font size=3>You're a step above the rest of the dealers when it comes to chemistry. Due to this, you were hired by a local gang after you caught their interest.</font></b></span>")
 			U.verbs -= list(/mob/living/carbon/human/proc/gangerclass,)
@@ -1187,6 +1183,7 @@ Pilgrim Fate System
 	cultist_chance = 0 // grog like emperorah :) // bouncer should only be cultist if the innkeeper is. as they would get easily indoctrinated by their dad/boss
 	species_role = "Ogryn"
 	access = list(access_village, access_ganger,access_bar)
+	start_message = "<span class='notice'><b><font size=3>You're the biggest, baddest muscle on Messina. Protect the Underboss and his buddy the ROGUE TRADER!</font></b></span>"
 
 	equip(var/mob/living/carbon/human/H)
 	//theres gonna be some redundencies here but I do not careeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
@@ -1195,7 +1192,6 @@ Pilgrim Fate System
 		H.add_stats(rand(20,30), rand(15,18), rand(15,18), rand (2,5)) //ogryn are stronger than astartes or smh i don't remember
 		H.add_skills(rand(10,13),1,1,1,1) //melee, ranged, med, eng, surgery
 		H.warfare_language_shit(LANGUAGE_LOW_GOTHIC)
-		to_chat(H, "<span class='notice'><b><font size=3>You're the biggest, baddest muscle on Messina. Protect the Underboss and his buddy the ROGUE TRADER!</font></b></span>")
 
 
 

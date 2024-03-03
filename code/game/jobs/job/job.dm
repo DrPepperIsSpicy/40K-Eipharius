@@ -66,6 +66,12 @@ GLOBAL_LIST_EMPTY(family_blacklist)
 	var/smg_skill = 6
 	var/cultist_chance 		// Don't set for zero, 100 for certain chance like for pilgrims.
 
+	// Skills
+
+	// Attributes
+
+	// Start things
+	var/start_message // Keep empty for no start message
 
 /datum/job/New()
 	..()
@@ -134,6 +140,9 @@ GLOBAL_LIST_EMPTY(family_blacklist)
 	if(!outfit)
 		return FALSE
 	. = outfit.equip(H, title, alt_title)
+
+	if(start_message)
+		to_chat(H, start_message)
 
 /datum/job/proc/get_outfit(var/mob/living/carbon/human/H, var/alt_title, var/datum/mil_branch/branch, var/datum/mil_rank/grade)
 	if(alt_title && alt_titles)
