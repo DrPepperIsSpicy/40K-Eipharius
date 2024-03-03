@@ -10,7 +10,7 @@
 	latejoin_at_spawnpoints = TRUE
 	announced = FALSE
 	cultist_chance = 80
-
+	start_message = "<span class='notice'><b><font size=3>You are a Pilgrim. You left your home with little in search of more. Rumors of a holy site drew you to this planet, Messina. and now life is in your hands. <br> <span class = 'badmood'> + Go to your pilgrim tab and select your fate. + </span> </font></b></span>"
 
 	equip(var/mob/living/carbon/human/H)
 		H.warfare_faction = IMPERIUM
@@ -23,7 +23,6 @@
 		H.voice_in_head(pick(GLOB.lone_thoughts))
 		H.stat = UNCONSCIOUS
 		H.sleeping = 500
-		to_chat(H, "<span class='notice'><b><font size=3>You are a Pilgrim. You left your home with little in search of more. Rumors of a holy site drew you to this planet, Messina. and now life is in your hands. <br> <span class = 'badmood'> + Go to your pilgrim tab and select your fate. + </span> </font></b></span>")
 		H.verbs += list(
 			/mob/living/carbon/human/proc/penitentclass,
 			/mob/living/carbon/human/proc/ideology,
@@ -1028,7 +1027,7 @@ Pilgrim Fate System
     announced = FALSE
     cultist_chance = 0
     species_role = "Skaven"
-	start_message = "<span class='notice'><b><font size=3>You-you are smarter than rest of pack-herd. You-you sneak on ship-transport to go on new world-planet.</font></b></span>"
+    start_message = "<span class='notice'><b><font size=3>You-you are smarter than rest of pack-herd. You-you sneak on ship-transport to go on new world-planet.</font></b></span>"
     equip(var/mob/living/carbon/human/H)
         H.warfare_faction = IMPERIUM
         ..()
