@@ -30,12 +30,12 @@
 	lmg_skill = 8
 	smg_skill = 8
 	cultist_chance = 40
-
+	start_message = "<span class='notice'><b><font size=3>You are a Rogue Trader tied directly to the Vane Dynasty, one of many heirs who might one day inherit a seat of power that would grant dominion over the Segmentum itself, your Warrant of Trade and it's required letters of marque were built upon the industries of war and the conquest of xenos worlds across the fringe. Many of the mercenaries in your employ are turncoats who betrayed the very species you eradicated. The brutal nature of your conquests and of House Vane's... methods in acquiring your letters of marque create the assurance that failure here on Messina will lead to your untimely end and that of your children.</font></b></span>"
 
 	equip(var/mob/living/carbon/human/H)
 		var/current_name = H.real_name
 		..()
-		H.fully_replace_character_name("Rogue Trader [current_name] Vane") // No title testing. 
+		H.fully_replace_character_name("Rogue Trader [current_name] Vane") // No title testing.
 		H.verbs += list(
 			/mob/living/carbon/human/proc/ideology,
 		)
@@ -49,7 +49,6 @@
 		H.witchblood()
 		H.warfare_faction = IMPERIUM
 		H.verbs += list(/mob/living/carbon/human/proc/hire)
-		to_chat(H, "<span class='notice'><b><font size=3>You are a Rogue Trader tied directly to the Vane Dynasty, one of many heirs who might one day inherit a seat of power that would grant dominion over the Segmentum itself, your Warrant of Trade and it's required letters of marque were built upon the industries of war and the conquest of xenos worlds across the fringe. Many of the mercenaries in your employ are turncoats who betrayed the very species you eradicated. The brutal nature of your conquests and of House Vane's... methods in acquiring your letters of marque create the assurance that failure here on Messina will lead to your untimely end and that of your children.</font></b></span>")
 
 
 /datum/job/captain/equip(var/mob/living/carbon/human/H)
@@ -70,7 +69,7 @@
 	economic_modifier = 5
 	social_class = SOCIAL_CLASS_MED
 	announced = 0
-	access = list(247,355,268,225,267,268,269,270,355,271,272,273) 
+	access = list(247,355,268,225,267,268,269,270,355,271,272,273)
 	minimal_player_age = 3
 	ideal_character_age = 40
 	outfit_type = /decl/hierarchy/outfit/job/cargo/janissary
@@ -82,6 +81,7 @@
 	lmg_skill = 8
 	smg_skill = 8
 	cultist_chance = 5
+	start_message = "<span class='notice'><b><font size=3>Three concepts hold primacy in Vessorine clan society to the exclusion of nearly all else: property, warcraft, and currency. The scarcity of resources and rocky landscape of Vessor made the ownership of arable land and grazing beasts one of the most important aspects of their primitive society. The populace grouped into clans for increased security and resources, and though the leader of a clan holds the title of Clansire, the term refers neither to patrilineal nor matrilineal descent. From an early age, typically after First Bonding, both male and female children begin training as janissaries. They undergo training to enhance their strength, stamina, and agility, sometimes doing so with only the food and water they can find in the wilderness. They also learn the three primary Vessorine battle arts: open-hand, blade, and gun lore. By the time they participate in their first contract, an ascension ritual called Second Bonding, they are formidable warriors equal to any in the Imperium. In preparation for Second Bonding, janissaries receive their first repatriation tattoo, which declares the bond a clan will pay for the return of their soldier if captured.</font></b></span>"
 
 	equip(var/mob/living/carbon/human/H)
 		var/current_name = H.real_name
@@ -97,7 +97,6 @@
 		H.warfare_language_shit(LANGUAGE_HIGH_GOTHIC)
 		H.set_trait(new/datum/trait/death_tolerant())
 		H.warfare_faction = IMPERIUM
-		to_chat(H, "<span class='notice'><b><font size=3>Three concepts hold primacy in Vessorine clan society to the exclusion of nearly all else: property, warcraft, and currency. The scarcity of resources and rocky landscape of Vessor made the ownership of arable land and grazing beasts one of the most important aspects of their primitive society. The populace grouped into clans for increased security and resources, and though the leader of a clan holds the title of Clansire, the term refers neither to patrilineal nor matrilineal descent. From an early age, typically after First Bonding, both male and female children begin training as janissaries. They undergo training to enhance their strength, stamina, and agility, sometimes doing so with only the food and water they can find in the wilderness. They also learn the three primary Vessorine battle arts: open-hand, blade, and gun lore. By the time they participate in their first contract, an ascension ritual called Second Bonding, they are formidable warriors equal to any in the Imperium. In preparation for Second Bonding, janissaries receive their first repatriation tattoo, which declares the bond a clan will pay for the return of their soldier if captured.</font></b></span>")
 
 /datum/job/xenomerc
 	title = "Xeno Mercenary"
@@ -111,7 +110,7 @@
 	access = list(247,355,268,225,267,268,269,270,355,271,272,273,access_bar,access_village,access_daemon)
 	announced = FALSE
 	cultist_chance = 0
-
+	start_message = "<span class='notice'><b><font size=3>You are a Xeno Mercenary hired by the Rogue Trader. Listen to their every command.  <br> <span class = 'badmood'> + Go to your Mercenary tab and select your fate. + </span> </font></b></span>"
 
 	equip(var/mob/living/carbon/human/H)
 		H.warfare_faction = IMPERIUM
@@ -126,7 +125,6 @@
 		H.witchblood()
 		H.stat = UNCONSCIOUS
 		H.sleeping = 500
-		to_chat(H, "<span class='notice'><b><font size=3>You are a Xeno Mercenary hired by the Rogue Trader. Listen to their every command.  <br> <span class = 'badmood'> + Go to your Mercenary tab and select your fate. + </span> </font></b></span>")
 		H.verbs += list(
 			/mob/living/carbon/human/proc/mercenaryclass,
 		)

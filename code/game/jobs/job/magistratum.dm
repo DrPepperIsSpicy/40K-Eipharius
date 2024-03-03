@@ -26,7 +26,7 @@
 
 
 	announced = FALSE
-
+	start_message = "<span class='notice'><b><font size=3>You are the Marshal appointed by the Magistratum,, your duty is to uphold Imperial law on this planet amongst the Pilgrims and to assist the Deacon where necessary. Your duties involve the investigation of crimes committed on behalf of the magistratum, collection of tithes and the interrogation or execution of criminals apprehended by the Magistratum.</font></b></span>"
 	equip(var/mob/living/carbon/human/H)
 		var/current_name = H.real_name
 		..()
@@ -43,8 +43,6 @@
 //		H.witchblood() //Psyker Enforcers don't exist
 		H.warfare_language_shit(LANGUAGE_LOW_GOTHIC )
 		H.warfare_faction = IMPERIUM
-
-		to_chat(H, "<span class='notice'><b><font size=3>You are the Marshal appointed by the Magistratum,, your duty is to uphold Imperial law on this planet amongst the Pilgrims and to assist the Deacon where necessary. Your duties involve the investigation of crimes committed on behalf of the magistratum, collection of tithes and the interrogation or execution of criminals apprehended by the Magistratum.</font></b></span>")
 
 /datum/job/investigator
 	title = "Planetary Investigator"
@@ -70,7 +68,7 @@
 
 
 	announced = FALSE
-
+	start_message = "<span class='notice'><b><font size=3>You're the local detective, a planetary investigator hired by the Governor to solve crimes. "
 	equip(var/mob/living/carbon/human/H)
 		var/current_name = H.real_name
 		..()
@@ -89,7 +87,6 @@
 		H.warfare_language_shit(LANGUAGE_LOW_GOTHIC )
 		H.warfare_faction = IMPERIUM
 
-		to_chat(H, "<span class='notice'><b><font size=3>You're the local detective, a planetary investigator hired by the Governor to solve crimes. ")
 
 /datum/job/ordinate
 	title = "Administratum Ordinate"
@@ -115,7 +112,7 @@
 
 
 	announced = FALSE
-
+	start_message = "<span class='notice'><b><font size=3>You're the local administrative ordinate, enforce the laws and mandates of the Administratum. Hired on personally by Prefectus Cornelius Decker who mentored you in the ways of the Adeptus Adminstratum. 'We do not traffic in the treachery of speech Scribe! Only bonds! Bonds! Chains of ink and parchment, unbreakable... we shackle The Imperium of Man to it's glorious purpose. Purity through procedure."
 	equip(var/mob/living/carbon/human/H)
 		var/current_name = H.real_name
 		..()
@@ -133,7 +130,6 @@
 //		H.witchblood() //Psyker Enforcers don't exist
 		H.warfare_language_shit(LANGUAGE_LOW_GOTHIC )
 		H.warfare_faction = IMPERIUM
-		to_chat(H, "<span class='notice'><b><font size=3>You're the local administrative ordinate, enforce the laws and mandates of the Administratum. Hired on personally by Prefectus Cornelius Decker who mentored you in the ways of the Adeptus Adminstratum. 'We do not traffic in the treachery of speech Scribe! Only bonds! Bonds! Chains of ink and parchment, unbreakable... we shackle The Imperium of Man to it's glorious purpose. Purity through procedure.")
 
 
 /datum/job/enforcer
@@ -159,7 +155,7 @@
 
 
 	announced = FALSE
-
+	start_message = "<span class='notice'><b><font size=3> An Enforcer in the Magisterium. The Governership order you. Yet the Inquisition can override them. Patrol with the cadets. Make sure they know what they’re doing. Collect taxes and ensure the order of the world is peaceful and good. Be an undercover cop if you’re feeling ballsy.</font></b></span>"
 	equip(var/mob/living/carbon/human/H)
 		..()
 		H.get_idcard()?.access = list(1984, access_security, access_guard_common, access_magi, access_all_personal_lockers, access_village)
@@ -178,7 +174,6 @@
 			/mob/living/carbon/human/proc/enforcerclass,
 			/mob/living/carbon/human/proc/ideology,
 		)
-		to_chat(H, "<span class='notice'><b><font size=3> An Enforcer in the Magisterium. The Governership order you. Yet the Inquisition can override them. Patrol with the cadets. Make sure they know what they’re doing. Collect taxes and ensure the order of the world is peaceful and good. Be an undercover cop if you’re feeling ballsy.</font></b></span>")
 
 /datum/job/cadet
 	title = "Enforcer Cadet"
@@ -203,7 +198,7 @@
 
 
 	announced = FALSE
-
+	start_message = "<span class='notice'><b><font size=3> (NEW PLAYER ROLE) A cadet in the Magisterium. The Deacon order you. Yet the Inquisition can override them. Your job is to assist the other enforcers in punishing crime and collecting taxes. </font></b></span>"
 	equip(var/mob/living/carbon/human/H)
 		var/current_name = H.real_name
 		..()
@@ -222,7 +217,6 @@
 			/mob/living/carbon/human/proc/enforcerclass,
 			/mob/living/carbon/human/proc/ideology,
 		)
-		to_chat(H, "<span class='notice'><b><font size=3> (NEW PLAYER ROLE) A cadet in the Magisterium. The Deacon order you. Yet the Inquisition can override them. Your job is to assist the other enforcers in punishing crime and collecting taxes. </font></b></span>")
 
 /datum/job/arbitrator
 	title = "Arbitrator"
@@ -247,7 +241,7 @@
 
 
 	announced = FALSE
-
+	start_message = "<span class='notice'><b><font size=3>You are an Arbitrator, in service to the Adeptus Arbites -- after a long journey across the sub-sector, you have arrived planetside and can begin your holy work bringing judgement to this planet. Your ultimate loyalty being to Holy Terra herself and the judiciary arm of the Adeptus Arbites.</font></b></span>"
 	equip(var/mob/living/carbon/human/H)
 		var/current_name = H.real_name
 		..()
@@ -267,7 +261,6 @@
 		)
 		H.get_idcard()?.access = list(access_security, access_guard_common, access_magi, access_all_personal_lockers, access_village, access_inquisition)
 
-		to_chat(H, "<span class='notice'><b><font size=3>You are an Arbitrator, in service to the Adeptus Arbites -- after a long journey across the sub-sector, you have arrived planetside and can begin your holy work bringing judgement to this planet. Your ultimate loyalty being to Holy Terra herself and the judiciary arm of the Adeptus Arbites.</font></b></span>")
 // FATES
 /mob/living/carbon/human/proc/enforcerclass()
 	set name = "Select your equipment." // Do not give the Investigate this. They spawn with the Mateba.
