@@ -43,7 +43,6 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 		H.set_trait(new/datum/trait/death_tolerant())
 		H.warfare_faction = IMPERIUM
 		H.verbs += list(/mob/living/carbon/human/proc/hire)
-		to_chat(H, "<span class='notice'><b><font size=3>  </font></b></span>")
 		H.get_idcard()?.access = list(20, 331, access_RC_announce, access_ai_upload, access_heads)
 		H.verbs += list(
 			/mob/living/carbon/human/proc/governorclass,
@@ -74,7 +73,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	lmg_skill = 7
 	smg_skill = 7
 	cultist_chance = 35 // lots of delicacies growing up
-
+	start_message = "<span class='notice'><b><font size=3>You are still young. Orders probably won’t be taken seriously. The next in line to the throne of Messina. Waiting simply takes too long. Why not have the Governor simply… fall down some stairs? Make sure the Enforcers and Inquisition don’t get suspicious and have a stable rise to the throne.</font></b></span>"
 	equip(var/mob/living/carbon/human/H)
 		var/current_name = H.real_name
 		..()
@@ -88,7 +87,6 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 		H.verbs += list(
 			/mob/living/carbon/human/proc/ideology,
 		)
-		to_chat(H, "<span class='notice'><b><font size=3>You are still young. Orders probably won’t be taken seriously. The next in line to the throne of Messina. Waiting simply takes too long. Why not have the Governor simply… fall down some stairs? Make sure the Enforcers and Inquisition don’t get suspicious and have a stable rise to the throne.</font></b></span>")
 		H.verbs += list(
 			/mob/living/carbon/human/proc/servantclass)
 	access = list(20, 331, 333, 63, access_security, access_guard_common, access_magi,
@@ -219,7 +217,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 					message_admins("[usr.key] [usr.name] HAS RECEIVED OBJECTIVE: WARNING. HOUSE VANE ARCHEOTECH SHIPMENT MISSING. THE SAFE DELIVERY OF A HOLY ARCHEOTECH ARTIFACT TO THE MILITANT GENERAL IS NOT OPTIONAL -- VOIDSHIP DEPARTURE IMMINENT FAILURE TO FULFILL THE REQUEST OF THE MILITANT GENERAL WILL RESULT IN SUMMARY ACTION.")
 					to_world("<B>You hear that the tithe vessel has been in dock for days awaiting it's final deliveries for the Holy Crusade Force -- rumours are the Lord Militant General had invested many millions of thrones into the growth of the colony world, you would imagine his anger at such an investment going so poorly.</B>")
 					sleep(600*10)
-					to_world("<B>You have heard tales.... of RATMA. The rat god of the sewers. He who will make the world ratling...</B>")					
+					to_world("<B>You have heard tales.... of RATMA. The rat god of the sewers. He who will make the world ratling...</B>")
 			else
 				to_chat(U,"<span class='danger'><b><font size=4>THE MECHANICUS & HOUSE VANE</font></b></span>")
 				new /obj/item/stack/thrones/ten(src.loc)
@@ -263,7 +261,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 					message_admins("[usr.key] [usr.name] HAS RECEIVED OBJECTIVE: WARNING. HOUSE VANE ARCHEOTECH SHIPMENT MISSING. THE SAFE DELIVERY OF A HOLY ARCHEOTECH ARTIFACT TO THE MILITANT GENERAL IS NOT OPTIONAL -- VOIDSHIP DEPARTURE IMMINENT FAILURE TO FULFILL THE REQUEST OF THE MILITANT GENERAL WILL RESULT IN SUMMARY ACTION.")
 					to_world("<B>You hear that the tithe vessel has been in dock for days awaiting it's final deliveries for the Holy Crusade Force -- rumours are the Lord Militant General had invested many millions of thrones into the growth of the colony world, you would imagine his anger at such an investment going so poorly.</B>")
 					sleep(600*10)
-					to_world("<B>You have heard tales.... of RATMA. The rat god of the sewers. He who will make the world ratling...</B>")		
+					to_world("<B>You have heard tales.... of RATMA. The rat god of the sewers. He who will make the world ratling...</B>")
 
 
 /mob/living/carbon/human/proc/servantclass()
@@ -390,7 +388,7 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 	lmg_skill = 6
 	smg_skill = 7
 	cultist_chance = 35
-
+	start_message = "<span class='notice'><b><font size=3>You are a servant in direct service to the Governorship, having been in service to their family for generations. They own yoH. Change that. If you want.</font></b></span>"
 	equip(var/mob/living/carbon/human/H)
 		var/current_name = H.real_name
 		..()
@@ -408,7 +406,6 @@ var/datum/announcement/minor/captain_announcement = new(do_newscast = 1)
 		)
 		H.verbs += list(
 			/mob/living/carbon/human/proc/servantclass,)
-		to_chat(H, "<span class='notice'><b><font size=3>You are a servant in direct service to the Governorship, having been in service to their family for generations. They own yoH. Change that. If you want.</font></b></span>")
 
 
 /mob/living/carbon/human/proc/hire(var/mob/living/carbon/human/M in view(src))

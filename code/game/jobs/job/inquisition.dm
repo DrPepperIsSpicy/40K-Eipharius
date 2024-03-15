@@ -74,7 +74,7 @@
 	lmg_skill = 10
 	smg_skill = 10
 	cultist_chance = 32
-
+	start_message = "<span class='notice'><b><font size=3>You are extremis diabolus, an inquisitor in service to the Ordos that has been considered for reasons up to you, a liability to the inquisition. Every person, asset and object on this planet is a tool or resource to be exploited. Humiliation, torture and the dull thud of a bolt pistol is what awaits you in failure should you not prove yourself here. Your acolytes personally selected to serve only you, whether they survive the horrid taint associated with your name and rise to the ranks of Inquisitor shall be determined in the coming weeks.</font></b></span>"
 	equip(var/mob/living/carbon/human/H)
 		var/current_name = H.real_name
 		..()
@@ -97,7 +97,6 @@
 			/mob/living/carbon/human/proc/inqclass)
 		H.say(":i [title] &(47*TECHNICA)Z(INQ)... transponder signal active.")
 		H.vice = null
-		to_chat(H, "<span class='notice'><b><font size=3>You are extremis diabolus, an inquisitor in service to the Ordos that has been considered for reasons up to you, a liability to the inquisition. Every person, asset and object on this planet is a tool or resource to be exploited. Humiliation, torture and the dull thud of a bolt pistol is what awaits you in failure should you not prove yourself here. Your acolytes personally selected to serve only you, whether they survive the horrid taint associated with your name and rise to the ranks of Inquisitor shall be determined in the coming weeks.</font></b></span>")
 
 /datum/job/inquisitor/equip(var/mob/living/carbon/human/H)
 	. = ..()

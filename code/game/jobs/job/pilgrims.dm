@@ -11,20 +11,17 @@
 	announced = FALSE
 	cultist_chance = 80
 	start_message = "<span class='notice'><b><font size=3>You are a Pilgrim. You left your home with little in search of more. Rumors of a holy site drew you to this planet, Messina. and now life is in your hands. <br> <span class = 'badmood'> + Go to your pilgrim tab and select your fate. + </span> </font></b></span>"
-
+	class_sheet = /datum/class_sheet/penitent
 	equip(var/mob/living/carbon/human/H)
 		H.warfare_faction = IMPERIUM
 		..()
-		H.add_stats(rand(1,2), rand(1,2), rand(1,2), rand (1,2)) //no stats when spawning so they are FORCED to select class first
 		H.warfare_language_shit(LANGUAGE_LOW_GOTHIC)
 		H.adjustStaminaLoss(-INFINITY)
 		H.assign_random_quirk()
 		H.witchblood()
 		H.voice_in_head(pick(GLOB.lone_thoughts))
-		H.stat = UNCONSCIOUS
-		H.sleeping = 500
+
 		H.verbs += list(
-			/mob/living/carbon/human/proc/penitentclass,
 			/mob/living/carbon/human/proc/ideology,
 		)
 
@@ -110,287 +107,6 @@
 		if("Radical - Xanthite")
 			to_chat(U,"<span class='danger'><b><font size=4>THE XANTHITE</font></b></span>")
 			to_chat(U,"<span class='goodmood'><b><font size=3>Xanthites do not advocate giving in to Chaos, bur rather wish to capture its essence and turn it to useful rather than destructive purposes. In the same way the Imperium uses the Warp for travel, Xanthites believe that other facets of Chaos can be controlled and tamed to benefit mankind. Thus these agents of radical heresy investigate all aspects of the Warp and Chaos often spending lifetimes in search of heretical knowledge, imbuing its power into themselves whenever possible. Xanthites have even been known to establish their own Chaos Cults, using the sect to unravel ancient mysteries and lore. Most though a Xanthite is a member of the artisan or noble classes of Imperial Society obsessed wiht forbidden lore.</font></b></span>")
-
-/*
-Pilgrim Fate System
-*/
-
-//mob/living/carbon/human/proc/penitentclass(var/mob/living/carbon/human/M)
-/mob/living/carbon/human/proc/penitentclass()
-	set name = "Select your class"
-	set category = "CHOOSE YOUR FATE"
-	set desc = "Choose your new profession on this strange world."
-	if(!ishuman(src))
-		to_chat(src, "<span class='notice'>How tf are you seeing this, ping Wel Ard immediately</span>")
-		return
-	if(src.stat == DEAD)
-		to_chat(src, "<span class='notice'>You can't choose a class when you're dead.</span>")
-		return
-
-	var/mob/living/carbon/human/U = src
-	U.verbs -= list(/mob/living/carbon/human/proc/penitentclass,) //removes verb
-	var/fates = list("Mercenary","Scum","Nomad","Messian Tribal","Witch Hunter",)
-
-
-	var/classchoice = input("Choose your fate", "Available fates") as anything in fates
-
- //10 is base stat, below 12 is child stat, childs are supposed to be somewhere between 6-14 in stats.
- //skills are between 1-5 for roles that have little to no reason to know something, 5-10 if they are able to naturally learn those skills, 5 is baseline,
-	switch(classchoice)
-
-		if("Messian Tribal")
-			U.add_skills(rand(5,8),rand(4,6),rand(3,6),rand(2,6),rand(2,6)) //melee, ranged, med, eng, surgery
-			equip_to_slot_or_store_or_drop(new /obj/item/clothing/under/rank/victorian, slot_w_uniform)
-			new /obj/item/glass_jar(src.loc)
-			new /obj/item/storage/backpack/satchel/warfare(src.loc)
-			new /obj/item/device/radio/headset/headset_service(src.loc)
-			new /obj/item/device/flashlight/lantern(src.loc)
-			new /obj/item/paper/administratum(src.loc)
-			new /obj/item/pen(src.loc)
-			equip_to_slot_or_store_or_drop(new /obj/item/card/id/pilgrim/penitent, slot_wear_id)
-			new /obj/item/clothing/shoes/jackboots/pilgrim_boots(src.loc)
-			U.verbs -= list(/mob/living/carbon/human/proc/penitentclass,) //removes verb
-			U.stat = CONSCIOUS
-			U.sleeping = 0
-			to_chat(U, "<span class='goodmood'>+ You awaken from your slumber... +</span>\n")
-			if(prob(15))
-				to_chat(U,"<span class='danger'><b><font size=4>THE VENATOR</font></b></span>")
-				to_chat(U,"<span class='goodmood'><b><font size=3>You have had glimpses of the future, in these waking dreams you see yourself fighting against a terrible foe. A dark and hideous creature, this day will come soon. Train and prepare yourself for this fight, track down the great beasts of the land. You are not hunted. You are the hunter. </font></b></span>")
-				U.add_stats(rand(18,19), rand(14,16), rand(12,18), rand (12,14))
-				new /obj/item/stack/thrones3/twenty(src.loc)
-				new /obj/item/clothing/suit/armor/exile(src.loc)
-				new /obj/item/melee/sword/machete/chopper/heavy/slayer(src.loc)
-
-			else if(prob(15))
-				to_chat(U,"<span class='danger'><b><font size=4>THE MASTER</font></b></span>")
-				to_chat(U,"<span class='goodmood'><b><font size=3>You are the master of the sewer, ruler of sin, master of your own kingdom. Embrace the dark and grow evil in the deep dark. </font></b></span>")
-				U.add_stats(rand(16,19), rand(16,19), rand(19,21), rand (14,16))
-				U.add_skills(rand(5,8),rand(5,6),rand(5,6),rand(2,6),rand(5,6))
-				new /obj/item/stack/thrones3/twenty(src.loc)
-				new /obj/item/clothing/suit/armor/scum2(src.loc)
-				new /obj/item/reagent_containers/food/snacks/threebread(src.loc)
-				var/datum/heretic_deity/deity = GOD(U.client.prefs.cult)
-					deity.add_cultist(U)
-				if(prob(2))
-					new /obj/item/device/radio/headset/headset_eng(src.loc)
-				if(prob(3))
-					new /obj/item/device/radio/headset/red_team(src.loc)
-				if(prob(5))
-					new /obj/item/device/radio/headset/headset_sci(src.loc)
-				if(prob(5))
-					new /obj/item/device/radio/headset/blue_team/all(src.loc)
-			else if(prob(35))
-				to_chat(U,"<span class='danger'><b><font size=4>THE HUNTER</font></b></span>")
-				to_chat(U,"<span class='goodmood'>You once were a traveller and a explorer, born with an innate gift for pathfinding among the Messian folk of the greater region. With the arrival of the Imperial Dogs came the shackling, forced servitude to a cruel governor and now you spend your days killing beasts to feed the fat nobles of the Imperium.</font></b></span>")
-				U.add_stats(rand(12,16), rand(14,17), rand(15,16), rand (12,16))
-				if(prob(40))
-					new /obj/item/gun/projectile/shotgun/pump/boltaction/shitty/glory(src.loc)
-				else
-					new /obj/item/gun/projectile/thrower(src.loc)
-					new /obj/item/storage/box/sniperammo/apds/bos(src.loc)
-					new /obj/item/storage/box/sniperammo/apds/bos(src.loc)
-				new /obj/item/ammo_magazine/handful/brifle_handful/ms(src.loc)
-				new /obj/item/ammo_magazine/handful/brifle_handful(src.loc)
-				new /obj/item/clothing/suit/sherpa(src.loc)
-				new /obj/item/reagent_containers/food/snacks/threebread(src.loc)
-			else // Add a fate that is high chance, you are a target of a bounty and give them clothing that cannot be removed which is a criminal marker. Criminal Barcode. Penitent Markings. Penitent Tattoo.
-				to_chat(U,"<span class='danger'><b><font size=4>THE TRIBAL</font></b></span>")
-				U.add_stats(rand(14,17), rand(14,17), rand(12,18), rand (12,14))
-				new /obj/item/stack/thrones3/twenty(src.loc)
-				new /obj/item/stack/thrones3/twenty(src.loc)
-				new /obj/item/melee/trench_axe/bspear/hunter(src.loc)
-				new /obj/item/clothing/suit/armor/leather(src.loc)
-				to_chat(U,"<span class='goodmood'><b><font size=3>You are a local hunter and tribal from one of the many wandering tribes of Messina, you've only recently learned of Low Gothic and are adjusting to imperial rule.. </font></b></span>")
-		if("Nomad")
-			U.add_skills(rand(5,8),rand(7,9),rand(5,7),rand(1,3),rand(1,6)) //melee, ranged, med, eng, surgery
-			equip_to_slot_or_store_or_drop(new /obj/item/clothing/under/rank/victorian, slot_w_uniform)
-			new /obj/item/clothing/shoes/jackboots/pilgrim_boots(src.loc)
-			new /obj/item/clothing/head/ushanka2(src.loc)
-			new /obj/item/device/radio/headset/headset_service(src.loc)
-			new /obj/item/storage/backpack/satchel/warfare(src.loc)
-			new /obj/item/device/flashlight/lantern(src.loc)
-			equip_to_slot_or_store_or_drop(new /obj/item/card/id/pilgrim/penitent, slot_wear_id)
-			new /obj/item/storage/belt/stalker(src.loc)
-			new /obj/item/clothing/head/pillbox(src.loc)
-			new /obj/item/clothing/suit/chokha(src.loc)
-			U.verbs -= list(/mob/living/carbon/human/proc/penitentclass,)
-			U.stat = CONSCIOUS
-			U.sleeping = 0
-			to_chat(U, "<span class='goodmood'>+ You awaken from your slumber... +</span>\n")
-			if(prob(15))
-				to_chat(U,"<span class='danger'><b><font size=4>THE BEAST</font></b></span>")
-				to_chat(U,"<span class='goodmood'>YOU ARE NOT MAN. YOU ARE BEAST MAN. GO OUT INTO WORLD AND DO BEAST THINGS.</font></b></span>")
-				U.add_stats(rand(16,18), rand(12,16), rand(17,18), rand (12,14))
-				new /obj/item/melee/trench_axe/bardiche/beast(src.loc)
-				new /obj/item/reagent_containers/food/snacks/threebread(src.loc)
-				new /obj/item/melee/sword/combat_knife/bowie(src.loc)
-				new /obj/item/clothing/suit/armor/bonearmor(src.loc)
-				new /obj/item/clothing/head/helmet/dragon(src.loc)
-			else
-				to_chat(U,"<span class='danger'><b><font size=4>THE EXPLORER</font></b></span>")
-				to_chat(U,"<span class='goodmood'>A skilled explorer of frontier worlds, you've plied your trade aiding the most unsensible of imperials and even xenos survive otherwise suicidal treks into alien worlds. Here you are once again, upon a xenos tainted world likely a few steps from your grave.</font></b></span>")
-				U.add_stats(rand(14,18), rand(15,18), rand(16,17), rand (14,16))
-				if(prob(30))
-					new /obj/item/gun/energy/las/lasgun/shitty(src.loc)
-				else if(prob(30))
-					new /obj/item/gun/energy/pulse/pulsepistol(src.loc)
-				else if(prob(10))
-					new /obj/item/gun/energy/pulse/plasma/pistol/glock(src.loc)
-				else
-					new /obj/item/gun/energy/las/triplex(src.loc)
-				new /obj/item/clothing/suit/armor/ranger2(src.loc)
-				new /obj/item/paper/administratum/weapon4(src.loc)
-				new /obj/item/pen(src.loc)
-				new /obj/item/paper/administratum/theta(src.loc)
-		if("Scum") // Pariah story. The magical 357
-			 //ex criminal, not fed very well, but random stats
-			U.add_skills(rand(5,10),rand(5,10),rand(5,10),rand(5,10),rand(5,10)) //melee, ranged, med, eng, surgery
-			new /obj/item/clothing/shoes/jackboots/pilgrim_boots(src.loc)
-			new /obj/item/device/radio/headset/headset_sci(src.loc)
-			equip_to_slot_or_store_or_drop(new /obj/item/card/id/pilgrim/penitent, slot_wear_id)
-			new /obj/item/torch/self_lit(src.loc)
-			new /obj/item/storage/backpack/satchel/warfare(src.loc)
-			U.verbs -= list(/mob/living/carbon/human/proc/penitentclass,)
-			U.stat = CONSCIOUS
-			U.sleeping = 0
-			to_chat(U, "<span class='goodmood'>+ You awaken from your slumber... +</span>\n")
-			if(prob(35))
-				to_chat(U,"<span class='danger'><b><font size=4>THE OBSCURA DEALER</font></b></span>")
-				to_chat(U,"<span class='goodmood'>You're a lowlife obscura dealer, with connections to the local gangs and heretical circles you make a nice living for yourself.</font></b></span>")
-				U.add_stats(rand(13,16), rand(15,16), rand(12,16), rand (17,18))
-				if(prob(50))
-					equip_to_slot_or_store_or_drop(new /obj/item/clothing/under/rank/victorian, slot_w_uniform)
-				else if(prob(50))
-					new /obj/item/clothing/under/rank/victorian/blred(src.loc)
-				else
-					new /obj/item/clothing/under/rank/victorian/redbl(src.loc)
-				new /obj/item/clothing/suit/scum(src.loc)
-				new /obj/item/clothing/head/scum(src.loc)
-				new /obj/item/storage/fancy/cigarettes/dromedaryco(src.loc)
-				new /obj/item/storage/fancy/cigarettes/dromedaryco(src.loc)
-				new /obj/item/storage/pill_bottle/happy(src.loc)
-				new /obj/item/storage/pill_bottle/happy(src.loc)
-				new /obj/item/storage/pill_bottle/zoom(src.loc)
-				new /obj/item/stack/thrones/five(src.loc)
-				new /obj/item/device/flashlight/lantern(src.loc)
-				new /obj/item/reagent_containers/food/snacks/threebread(src.loc)
-				new /obj/item/paper/administratum/weapon3(src.loc)
-				new /obj/item/pen(src.loc)
-				var/datum/heretic_deity/deity = GOD(U.client.prefs.cult)
-					deity.add_cultist(U)
-				if(prob(5))
-					new /obj/item/device/radio/headset/blue_team/all(src.loc)
-			else
-				to_chat(U,"<span class='danger'><b><font size=4>THE PENITENT</font></b></span>")
-				to_chat(U,"<span class='goodmood'>You are a penitent, after committing several horrible crimes to the imperium, you were arrested and imprisoned for years before being released by the church. As per your punishment you are marked and must take upon the burdens of others to ease your own...</font></b></span>")
-				U.add_stats(rand(16,17), rand(16,17), rand(12,16), rand (10,15))
-				new /obj/item/clothing/under/rank/penitent(src.loc)
-				new /obj/item/gun/projectile/slugrevolver/penitent(src.loc)
-				new /obj/item/ammo_magazine/c44(src.loc)
-				new /obj/item/ammo_magazine/c44(src.loc)
-				new /obj/item/clothing/suit/raggedrobe(src.loc)
-				new /obj/item/clothing/head/plebhood(src.loc)
-				new /obj/item/paper/administratum/weapon3(src.loc)
-				new /obj/item/pen(src.loc)
-				if(prob(25))
-					new /obj/item/device/radio/headset/headset_sci(src.loc)
-		if("Witch Hunter")
-			U.add_skills(rand(7,10),rand(8,10),rand(3,6),rand(2,4),rand(2,6)) //melee, ranged, med, eng, surgery
-			new /obj/item/storage/backpack/satchel/warfare(src.loc)
-			equip_to_slot_or_store_or_drop(new /obj/item/clothing/under/rank/victorian, slot_w_uniform)
-			new /obj/item/device/flashlight/lantern(src.loc)
-			new /obj/item/clothing/shoes/jackboots/pilgrim_boots(src.loc)
-			new /obj/item/clothing/accessory/holster/hip(src.loc)
-			new /obj/item/gun/energy/las/laspistol(src.loc)
-			equip_to_slot_or_store_or_drop(new /obj/item/card/id/key/grand/monastary, slot_wear_id)
-			U.verbs -= list(/mob/living/carbon/human/proc/penitentclass,)
-			U.stat = CONSCIOUS
-			U.sleeping = 0
-			to_chat(U,"<span class='danger'><b><font size=4>THE WITCH HUNTER</font></b></span>")
-			to_chat(U,"<span class='goodmood'>You are a Witch Hunter -- a unique subset of the Bounty Hunter Guild attached to the Chamber Militant, working both as Servant to the Ecclesiarchy and a 'bounty hunter' that the Ecclesiarchy can rely upon without tainting their own hands.</font></b></span>")
-			U.add_stats(rand(16,17), rand(14,16), rand(14,16), rand (10,12)) //veteran mercenary
-			new /obj/item/melee/sword/cane(src.loc)
-			new /obj/item/clothing/head/helmet/witch(src.loc)
-			new /obj/item/clothing/suit/armor/witch(src.loc)
-			new /obj/item/device/radio/headset/headset_sci(src.loc)
-			new /obj/item/paper/administratum/weapon4(src.loc)
-			new /obj/item/pen(src.loc)
-			new /obj/item/paper/administratum/theta(src.loc)
-		if("Mercenary")
-			U.add_skills(rand(7,10),rand(8,10),rand(3,6),rand(2,4),rand(2,6)) //melee, ranged, med, eng, surgery
-			new /obj/item/storage/backpack/satchel/warfare(src.loc)
-			equip_to_slot_or_store_or_drop(new /obj/item/clothing/under/rank/victorian, slot_w_uniform)
-			new /obj/item/device/radio/headset/headset_service(src.loc)
-			new /obj/item/device/flashlight/lantern(src.loc)
-			new /obj/item/clothing/shoes/jackboots/pilgrim_boots(src.loc)
-			equip_to_slot_or_store_or_drop(new /obj/item/card/id/pilgrim/penitent, slot_wear_id)
-			U.verbs -= list(/mob/living/carbon/human/proc/penitentclass,)
-			U.stat = CONSCIOUS
-			U.sleeping = 0
-			to_chat(U, "<span class='goodmood'>+ You awaken from your slumber... +</span>\n")
-			if(prob(25))
-				to_chat(U,"<span class='danger'><b><font size=4>THE PALADIN</font></b></span>")
-				to_chat(U,"<span class='goodmood'>A holy warrior of your chosen god, you work on behalf of the Ecclesiarchy(or the cult) as a slayer of the heretical and unfaithful. Face against the dark and protect your flock... for a price.</font></b></span>")
-				U.add_stats(rand(16,18), rand(14,16), rand(16,18), rand (10,12)) //veteran mercenary
-				new /obj/item/melee/trench_axe/glaive/adamantine(src.loc)
-				new /obj/item/clothing/suit/armor/brigandine(src.loc)
-				new /obj/item/clothing/head/helmet/hero(src.loc)
-				new /obj/item/paper/administratum/weapon3(src.loc)
-				new /obj/item/paper/administratum/theta(src.loc)
-				new /obj/item/pen(src.loc)
-				var/datum/heretic_deity/deity = GOD(U.client.prefs.cult)
-					deity.add_cultist(U)
-				if(prob(45))
-					new /obj/item/device/radio/headset/headset_sci(src.loc)
-			else if(prob(10))
-				to_chat(U,"<span class='danger'><b><font size=4>THE OPERATIVE</font></b></span>")
-				to_chat(U,"<span class='goodmood'>You are an operative sent here by your benefactors, mysterious patrons from worlds away to do work that may unlock the final steps to their ultimate plan((A-Help with your idea or even ask for a mission if you can't think of anything.))</font></b></span>")
-				U.add_stats(rand(13,17), rand(14,17), rand(14,17), rand (10,12)) //veteran mercenary
-				new /obj/item/gun/projectile/talon/renegade(src.loc)
-				new /obj/item/stack/thrones3/twenty(src.loc)
-				new /obj/item/plastique(src.loc)
-				new /obj/item/grenade/spawnergrenade/manhacks(src.loc)
-				new /obj/item/ammo_casing/c45/ap(src.loc)
-				new /obj/item/ammo_casing/c45/ap(src.loc)
-				new /obj/item/paper/administratum/weapon4(src.loc)
-				new /obj/item/paper/administratum/theta(src.loc)
-				new /obj/item/pen(src.loc)
-				new /obj/item/clothing/suit/armor/armoredtrench(src.loc)
-				if(prob(2))
-					new /obj/item/device/radio/headset/headset_eng(src.loc)
-				if(prob(2))
-					new /obj/item/device/radio/headset/red_team(src.loc)
-				if(prob(3))
-					new /obj/item/device/radio/headset/headset_sci(src.loc)
-				if(prob(15))
-					new /obj/item/device/radio/headset/blue_team/all(src.loc)
-			else
-				to_chat(U,"<span class='danger'><b><font size=4>THE BOUNTY HUNTER</font></b></span>")
-				to_chat(U,"<span class='goodmood'>A vicious bounty hunter traveling from system to system in search of their next payday, you live luxuriously only for moments before being plunged back into poverty. Hitching a ride to Messina with the last of your thrones, you gamble on the hope of finding work out here.(A-Help if nobody is hiring bounty hunters for a bounty target+pay)</font></b></span>")
-				U.add_stats(rand(13,17), rand(14,17), rand(14,17), rand (12,15)) //veteran mercenary
-				new /obj/item/gun/projectile/revolver/mateba(src.loc)
-				new /obj/item/ammo_magazine/c50(src.loc)
-				new /obj/item/ammo_magazine/c50(src.loc)
-				new /obj/item/paper/administratum/weapon4(src.loc)
-				new /obj/item/paper/administratum/theta(src.loc)
-				new /obj/item/pen(src.loc)
-				if(prob(60))
-					new /obj/item/clothing/suit/armor/bountyhunter2(src.loc)
-					new /obj/item/clothing/head/bountyhead(src.loc)
-				else if(prob(50))
-					new /obj/item/clothing/suit/armor/carapace3(src.loc)
-					new /obj/item/clothing/head/helmet/marinehelm(src.loc)
-				else if(prob(30))
-					new /obj/item/clothing/suit/armor/vanpa(src.loc)
-				else
-					new /obj/item/ammo_magazine/c50(src.loc)
-				if(prob(15))
-					new /obj/item/device/radio/headset/red_team(src.loc)
-					new /obj/item/card/id/key/middle/jail(src.loc)
-				if(prob(3))
-					new /obj/item/device/radio/headset/headset_sci(src.loc)
-					new /obj/item/card/id/key/grand/monastary(src.loc)
-
 
 /mob/living/carbon/human/proc/citizenclass()
 	set name = "Select your class"
@@ -571,7 +287,6 @@ Pilgrim Fate System
 			new /obj/item/device/flashlight/lantern(src.loc)
 			equip_to_slot_or_store_or_drop(new /obj/item/card/id/pilgrim/penitent, slot_wear_id)
 			new /obj/item/clothing/shoes/jackboots/pilgrim_boots(src.loc)
-			U.verbs -= list(/mob/living/carbon/human/proc/penitentclass,)
 			U.stat = CONSCIOUS
 			U.sleeping = 0
 			to_chat(U, "<span class='goodmood'>+ You awaken from your slumber... +</span>\n")
@@ -799,7 +514,6 @@ Pilgrim Fate System
 	announced = FALSE
 	cultist_chance = 45
 	start_message = "<span class='notice'><b><font size=3>An experienced medicae from your homeworld, you are one of many who booked passage to Messina in the hopes of building industries of medicine on a new world. You serve directly under the Magos Biologis who commands over the medicae of this world.</font></b></span>"
-
 	equip(var/mob/living/carbon/human/H)
 		H.warfare_faction = IMPERIUM
 		..()
@@ -1061,7 +775,6 @@ Pilgrim Fate System
 
 
 		H.verbs += list(
-			/mob/living/carbon/human/proc/penitentclass,
 			/mob/living/carbon/human/proc/ideology,
 		)
 
@@ -1183,12 +896,12 @@ Pilgrim Fate System
 	species_role = "Ogryn"
 	access = list(access_village, access_ganger,access_bar)
 	start_message = "<span class='notice'><b><font size=3>You're the biggest, baddest muscle on Messina. Protect the Underboss and his buddy the ROGUE TRADER!</font></b></span>"
-
+	attributes = /datum/attribute_sheet/pilgrim
 	equip(var/mob/living/carbon/human/H)
 	//theres gonna be some redundencies here but I do not careeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
 		H.warfare_faction = IMPERIUM
 		..()
-		H.add_stats(rand(20,30), rand(15,18), rand(15,18), rand (2,5)) //ogryn are stronger than astartes or smh i don't remember
+		//H.add_stats(rand(20,30), rand(15,18), rand(15,18), rand (2,5)) //ogryn are stronger than astartes or smh i don't remember
 		H.add_skills(rand(10,13),1,1,1,1) //melee, ranged, med, eng, surgery
 		H.warfare_language_shit(LANGUAGE_LOW_GOTHIC)
 

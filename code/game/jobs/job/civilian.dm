@@ -23,7 +23,7 @@
 	shotgun_skill = 3
 	lmg_skill = 3
 	smg_skill = 3
-
+	start_message = "<span class='notice'><b><font size=3>You are a servitor, specifically one designed for managing a bar and serving drinks. You are to obey Imperial citizens and serve their every need. You are nearly mindless and will follow any order given to you by a superior.</font></b></span>"
 
 
 	equip(var/mob/living/carbon/human/H)
@@ -41,7 +41,6 @@
 		H.bowels = 0 //until someone tells me that servitors eat and shit this shall be it
 		H.thirst = INFINITY
 		H.nutrition = INFINITY
-		to_chat(H, "<span class='notice'><b><font size=3>You are a servitor, specifically one designed for managing a bar and serving drinks. You are to obey Imperial citizens and serve their every need. You are nearly mindless and will follow any order given to you by a superior.</font></b></span>")
 
 /datum/job/hydro
 	title = "Vane Bondsman"
@@ -63,7 +62,7 @@
 	lmg_skill = 3
 	smg_skill = 3
 	cultist_chance = 30
-
+	start_message = "<span class='notice'><b><font size=3>You were formely a lowly crew member to the Lord Captain, your freedom being granted by the wisdom of the Lord trader who gave you settling rights upon Messina. After a grueling campaign across the fringe, your Lord Captain had finally won both his dynasty and loyal crew the opportunity to finally settle down.. in the ass end of the frontier. </font></b></span>"
 	equip(var/mob/living/carbon/human/H)
 		var/current_name = H.real_name
 		..()
@@ -81,7 +80,6 @@
 			/mob/living/carbon/human/proc/ideology,
 		)
 		H.warfare_faction = IMPERIUM
-		to_chat(H, "<span class='notice'><b><font size=3>You were formely a lowly crew member to the Lord Captain, your freedom being granted by the wisdom of the Lord trader who gave you settling rights upon Messina. After a grueling campaign across the fringe, your Lord Captain had finally won both his dynasty and loyal crew the opportunity to finally settle down.. in the ass end of the frontier. </font></b></span>")
 
 
 
@@ -110,7 +108,7 @@
 			U.add_skills(rand(6,8),rand(6,8),rand(4,6),rand(5,6),rand(2,6)) //melee, ranged, med, eng, surgery
 			new /obj/item/clothing/gloves/thick(src.loc)
 			equip_to_slot_or_store_or_drop(new /obj/item/clothing/under/rank/victorian, slot_w_uniform)
-			new /obj/item/device/flashlight/lantern(src.loc) 
+			new /obj/item/device/flashlight/lantern(src.loc)
 			new /obj/item/clothing/shoes/jackboots/noble(src.loc)
 			new /obj/item/clothing/head/helmet/seolhelm(src.loc)
 			new /obj/item/clothing/suit/armor/seolarmor(src.loc)
@@ -123,7 +121,7 @@
 			new /obj/item/clothing/suit/armor/hauberk(src.loc)
 			new /obj/item/farmshovel(src.loc)
 			new /obj/item/storage/plants(src.loc)
-			new /obj/item/device/flashlight/lantern(src.loc) 
+			new /obj/item/device/flashlight/lantern(src.loc)
 			new /obj/item/device/analyzer/plant_analyzer(src.loc)
 			new /obj/item/clothing/gloves/thick/botany(src.loc)
 			new /obj/item/melee/classic_baton/trench_club/overseer(src.loc)

@@ -69,7 +69,8 @@ GLOBAL_LIST_EMPTY(family_blacklist)
 	// Skills
 
 	// Attributes
-
+	var/datum/attribute_sheet/attributes = /datum/attribute_sheet
+	var/datum/class_sheet/class_sheet // List of classes. Leave empty if there are none.
 	// Start things
 	var/start_message // Keep empty for no start message
 
@@ -135,6 +136,21 @@ GLOBAL_LIST_EMPTY(family_blacklist)
 			H.unlock_achievement(new/datum/achievement/ogryn())
 
 	do_skill_setup(H)//Give them all their skills.
+
+	if(attributes)
+		if(!GLOB.attribute_sheets[attributes])
+			GLOB.attribute_sheets[attributes] = new attributes
+		GLOB.attribute_sheets[attributes].set_attributes(H)
+
+	if(class_sheet)
+		if(!GLOB.class_sheets[class_sheet])
+			GLOB.class_sheets[class_sheet] = new class_sheet
+		H.stat = UNCONSCIOUS
+		H.sleeping = 500
+		H.verbs += list(
+			/mob/living/carbon/human/proc/class_select,
+		)
+
 
 	var/decl/hierarchy/outfit/outfit = get_outfit(H, alt_title, branch, grade)
 	if(!outfit)

@@ -1,0 +1,2 @@
+GLOBAL_LIST_EMPTY(attribute_sheets)
+GLOBAL_LIST_EMPTY(class_sheets)
